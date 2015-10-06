@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package battletank.utils;
+package battletank.models;
 
+import battletank.utils.Point;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
@@ -17,21 +18,21 @@ import javax.imageio.ImageIO;
  *
  * @author Tiago
  */
-public abstract class Drawable {
+public abstract class Creature {
     public Point position;
-    public int cutSize;
+    public int size;
     public BufferedImage image;
     public int direction;
     
-    public Drawable(java.net.URL fileName, int x, int y, int cutSize, int initDirection) {
+    public Creature(java.net.URL fileName, int x, int y, int cutSize, int initDirection) {
         try {
             image = ImageIO.read(fileName);
         }
         catch (IOException ex) {
-            Logger.getLogger(Drawable.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Creature.class.getName()).log(Level.SEVERE, null, ex);
         }
         position = new Point(x, y);
-        this.cutSize = cutSize;
+        this.size = cutSize;
         direction = initDirection;
     }
     
@@ -39,8 +40,8 @@ public abstract class Drawable {
 		Graphics2D g = (Graphics2D) g2d.create();		
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g.drawImage(image, position.x, position.y,
-                        position.x+cutSize, position.y+cutSize,
-                        cutSize*direction, 0, cutSize*(direction+1), cutSize,
+                        position.x+size, position.y+size,
+                        size*direction, 0, size*(direction+1), size,
                         null);
 		g.dispose();
     }

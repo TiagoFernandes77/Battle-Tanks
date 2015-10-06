@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package battletank.objects;
+package battletank.models;
 
 import battletank.utils.Direction;
-import battletank.utils.Drawable;
 
 /**
  *
  * @author Tiago
  */
-public class Tank extends Drawable{
+public class Tank extends Creature{
     private int life;
     private boolean isActive;
     private int xLimit;
@@ -35,7 +34,6 @@ public class Tank extends Drawable{
         isActive = true;
         xLimit = screenWidth;
         yLimit = screenHeigth;
-        
     }
 
     public int getLife() {
@@ -64,6 +62,10 @@ public class Tank extends Drawable{
 
     public void setyLimit(int yLimit) {
         this.yLimit = yLimit;
+    }
+    
+    public void setSpeed(int speed){
+        this.speed = speed;
     }
     
     public void turnUp(){
@@ -97,14 +99,22 @@ public class Tank extends Drawable{
     public boolean isEdge(int direction){
         switch(direction){
             case Direction.DOWN:
-                return position.y+cutSize+(speed/2) >= yLimit;
+                return position.y+size+(speed/2) >= yLimit;
             case Direction.UP:
                 return position.y-(speed/2) <= 0;
             case Direction.LEFT:
                 return position.x-(speed/2) <= 0;
             case Direction.RIGHT:
-                return position.x+cutSize+(speed/2) >= xLimit;
+                return position.x+size+(speed/2) >= xLimit;
         }
         return false;
+    }
+
+    public void wasStruck(Tangible obj) {
+        
+    }
+
+    public int causeDamage() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

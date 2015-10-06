@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package battletank.objects;
+package battletank.models;
 
-import battletank.utils.Drawable;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -20,9 +19,9 @@ import javax.swing.JFrame;
  */
 public class Background extends JFrame{
     private BufferedImage screen;
-    private Drawable[] objects;
+    private Creature[] objects;
     
-    public Background(java.net.URL fileName, Drawable[] objects){
+    public Background(java.net.URL fileName, Creature[] objects){
         super("Tank Battle");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -49,7 +48,7 @@ public class Background extends JFrame{
         
         g2.drawImage(screen, 0, 0, null);
         
-        for(Drawable obj : objects){
+        for(Creature obj : objects){
             obj.draw((Graphics2D) g2);
         }
         g.dispose();

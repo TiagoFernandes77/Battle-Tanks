@@ -5,9 +5,9 @@
  */
 package battletank.core;
 
-import battletank.objects.Background;
-import battletank.objects.Tank;
-import battletank.utils.Drawable;
+import battletank.models.Background;
+import battletank.models.Tank;
+import battletank.models.Creature;
 import battletank.utils.Keyboard;
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
@@ -29,8 +29,8 @@ public class BattleTank extends Game{
         player1 = new Tank(getClass().getResource("/Imagens/tank1.png"),
                 10, 10, 10, screenWidth, screenHeigth);
         keyboard = new Keyboard();
-        Drawable[] drawableObjects;
-        drawableObjects = new Drawable[1];
+        Creature[] drawableObjects;
+        drawableObjects = new Creature[1];
         drawableObjects[0] = player1;
         
         background = new Background(
