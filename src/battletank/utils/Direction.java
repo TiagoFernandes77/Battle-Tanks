@@ -9,6 +9,6 @@ package battletank.utils;
  *
  * @author Tiago
  */
-public enum Direction {
-    UP, DOWN, LEFT, RIGHT;
+public class Direction {
+    public final static int UP = 1, DOWN = 0, LEFT = 2, RIGHT = 3;
 }

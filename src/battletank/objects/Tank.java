@@ -5,8 +5,8 @@
  */
 package battletank.objects;
 
+import battletank.utils.Direction;
 import battletank.utils.Drawable;
-import java.net.URI;
 
 /**
  *
@@ -28,7 +28,7 @@ public class Tank extends Drawable{
      * @param screenHeigth
      */
     public Tank(java.net.URL fileName, int x, int y, int speed, int screenWidth, int screenHeigth){
-        super(fileName, x, y);
+        super(fileName, x, y, 50, Direction.DOWN);
         
         this.speed = speed;
         life = 1;
@@ -50,7 +50,6 @@ public class Tank extends Drawable{
         return isActive;
     }   
 
-
     public void setLife(int life) {
         this.life = life;
     }
@@ -67,4 +66,45 @@ public class Tank extends Drawable{
         this.yLimit = yLimit;
     }
     
+    public void turnUp(){
+        if (!isEdge(Direction.UP)) {
+            position.y -= speed;
+            direction = Direction.UP;
+        }
+    }
+    
+    public void turnDown(){
+        if (!isEdge(Direction.DOWN)) {
+            position.y += speed;
+            direction = Direction.DOWN;
+        }
+    }
+    
+    public void turnLeft(){
+        if (!isEdge(Direction.LEFT)) {
+            position.x -= speed;
+            direction = Direction.LEFT;
+        }
+    }
+    
+    public void turnRigth(){
+        if (!isEdge(Direction.RIGHT)) {
+            position.x += speed;
+            direction = Direction.RIGHT;
+        }
+    }
+    
+    public boolean isEdge(int direction){
+        switch(direction){
+            case Direction.DOWN:
+                return position.y+cutSize+(speed/2) >= yLimit;
+            case Direction.UP:
+                return position.y-(speed/2) <= 0;
+            case Direction.LEFT:
+                return position.x-(speed/2) <= 0;
+            case Direction.RIGHT:
+                return position.x+cutSize+(speed/2) >= xLimit;
+        }
+        return false;
+    }
 }

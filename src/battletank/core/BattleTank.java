@@ -8,7 +8,9 @@ package battletank.core;
 import battletank.objects.Background;
 import battletank.objects.Tank;
 import battletank.utils.Drawable;
+import battletank.utils.Keyboard;
 import java.awt.EventQueue;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -18,15 +20,15 @@ public class BattleTank extends Game{
     
     public final Background background;
     public final Tank player1;
+    public final Keyboard keyboard;
 
     public BattleTank() {
         super(30);
         int screenWidth = 800;
         int screenHeigth = 600;
-        System.out.println("Saida "+getClass().getResource("/Imagens/tank.jpg").toString());
-        player1 = new Tank(getClass().getResource("/Imagens/tank.jpg"),
+        player1 = new Tank(getClass().getResource("/Imagens/tank1.png"),
                 10, 10, 10, screenWidth, screenHeigth);
-        
+        keyboard = new Keyboard();
         Drawable[] drawableObjects;
         drawableObjects = new Drawable[1];
         drawableObjects[0] = player1;
@@ -34,11 +36,27 @@ public class BattleTank extends Game{
         background = new Background(
                 getClass().getResource("/Imagens/background.jpg"),
                 drawableObjects);
+        
+        background.addKeyListener(keyboard);
     }
 
     @Override
     public void processLogics() {
-        int xx = 2; //To change body of generated methods, choose Tools | Templates.
+        if (keyboard.isKeyPressed(KeyEvent.VK_UP)) {
+            player1.turnUp();
+        }
+        
+        if (keyboard.isKeyPressed(KeyEvent.VK_DOWN)) {
+            player1.turnDown();
+        }
+        
+        if (keyboard.isKeyPressed(KeyEvent.VK_LEFT)) {
+            player1.turnLeft();
+        }
+        
+        if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
+            player1.turnRigth();
+        }
     }
 
     @Override

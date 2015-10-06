@@ -17,6 +17,7 @@ public class MainLoop implements Runnable{
     private final Game game;
     
     public MainLoop(Game game){
+        this.isRunning = true;
         this.game = game;
     }
     

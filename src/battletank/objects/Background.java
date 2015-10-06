@@ -9,7 +9,6 @@ import battletank.utils.Drawable;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,6 +27,7 @@ public class Background extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
         setResizable(false);
+        setVisible(true);
         createBufferStrategy(2);
         setIgnoreRepaint(true);
         this.objects = objects;
@@ -46,6 +46,8 @@ public class Background extends JFrame{
                getInsets().top, 
                getWidth() - getInsets().right, 
                getHeight() - getInsets().bottom);
+        
+        g2.drawImage(screen, 0, 0, null);
         
         for(Drawable obj : objects){
             obj.draw((Graphics2D) g2);
