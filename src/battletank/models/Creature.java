@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  * @author Tiago
  */
-public abstract class Creature {
+public abstract class Creature implements Drawable, Tangible{
     public Point position;
     public int size;
     public BufferedImage image;
@@ -36,6 +36,7 @@ public abstract class Creature {
         direction = initDirection;
     }
     
+    @Override
     public void draw(Graphics2D g2d) {
 		Graphics2D g = (Graphics2D) g2d.create();		
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -46,6 +47,7 @@ public abstract class Creature {
 		g.dispose();
     }
     
+    @Override
     public Point getPosition(){
         return position;
     }
@@ -54,5 +56,27 @@ public abstract class Creature {
         position.x = x;
         position.y = y;
     }
+
+    @Override
+    public int getSize() {
+        return size;
+    }
+
+    @Override
+    public boolean hasImpact(Tangible target) {
+        Point targetPosition = target.getPosition();
+        int targetSize = target.getSize();
+        
+        return !(targetPosition.y+targetSize < position.y ||
+                targetPosition.x > position.x+size ||
+                targetPosition.x+targetSize < position.x ||
+                targetPosition.y > position.y+size);
+    }
+
+    @Override
+    public abstract void wasStruck(Tangible obj);
+
+    @Override
+    public abstract int causeDamage();
     
 }

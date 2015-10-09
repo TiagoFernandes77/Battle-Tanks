@@ -110,10 +110,13 @@ public class Tank extends Creature{
         return false;
     }
 
+    @Override
     public void wasStruck(Tangible obj) {
+        int damage = obj.causeDamage();
         
     }
 
+    @Override
     public int causeDamage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
