@@ -8,6 +8,8 @@ package battletank.core;
 import battletank.models.Background;
 import battletank.models.Tank;
 import battletank.models.Creature;
+import battletank.models.Edge;
+import battletank.utils.Direction;
 import battletank.utils.Keyboard;
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
@@ -20,14 +22,23 @@ public class BattleTank extends Game{
     
     public final Background background;
     public final Tank player1;
+    public final Edge[] edges;
     public final Keyboard keyboard;
 
     public BattleTank() {
         super(30);
         int screenWidth = 800;
         int screenHeigth = 600;
+        
+        edges = new Edge[4];
+        edges[Direction.DOWN] = new Edge(Direction.DOWN, screenWidth, screenHeigth);
+        edges[Direction.UP] = new Edge(Direction.UP, screenWidth, screenHeigth);
+        edges[Direction.LEFT] = new Edge(Direction.LEFT, screenWidth, screenHeigth);
+        edges[Direction.RIGHT] = new Edge(Direction.RIGHT, screenWidth, screenHeigth);
+        
         player1 = new Tank(getClass().getResource("/Imagens/tank1.png"),
-                10, 10, 10, screenWidth, screenHeigth);
+                10, 10, 5, edges);
+        
         keyboard = new Keyboard();
         Creature[] drawableObjects;
         drawableObjects = new Creature[1];

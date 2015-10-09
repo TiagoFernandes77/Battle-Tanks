@@ -5,10 +5,16 @@
  */
 package battletank.models;
 
+import battletank.utils.Point;
+
 /**
  *
  * @author Tiago
  */
 public interface Tangible {
-    
+    Point getPosition();
+    public int getSize();
+    boolean hasImpact(Tangible target);
+    void wasStruck(Tangible obj);
+    int causeDamage();
 }

@@ -5,10 +5,12 @@
  */
 package battletank.models;
 
+import java.awt.Graphics2D;
+
 /**
  *
  * @author Tiago
  */
 public interface Drawable {
-    
+    void draw(Graphics2D g2d);
 }

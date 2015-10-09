@@ -14,26 +14,23 @@ import battletank.utils.Direction;
 public class Tank extends Creature{
     private int life;
     private boolean isActive;
-    private int xLimit;
-    private int yLimit;
     private int speed;
+    private final Edge[] edges;
     
     /**
      * @param fileName
      * @param x
      * @param y
      * @param speed
-     * @param screenWidth 
-     * @param screenHeigth
+     * @param edges
      */
-    public Tank(java.net.URL fileName, int x, int y, int speed, int screenWidth, int screenHeigth){
+    public Tank(java.net.URL fileName, int x, int y, int speed, Edge []edges){
         super(fileName, x, y, 50, Direction.DOWN);
         
         this.speed = speed;
         life = 1;
         isActive = true;
-        xLimit = screenWidth;
-        yLimit = screenHeigth;
+        this.edges = edges;
     }
 
     public int getLife() {
@@ -54,14 +51,6 @@ public class Tank extends Creature{
 
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
-    }
-
-    public void setxLimit(int xLimit) {
-        this.xLimit = xLimit;
-    }
-
-    public void setyLimit(int yLimit) {
-        this.yLimit = yLimit;
     }
     
     public void setSpeed(int speed){
@@ -97,17 +86,7 @@ public class Tank extends Creature{
     }
     
     public boolean isEdge(int direction){
-        switch(direction){
-            case Direction.DOWN:
-                return position.y+size+(speed/2) >= yLimit;
-            case Direction.UP:
-                return position.y-(speed/2) <= 0;
-            case Direction.LEFT:
-                return position.x-(speed/2) <= 0;
-            case Direction.RIGHT:
-                return position.x+size+(speed/2) >= xLimit;
-        }
-        return false;
+        return edges[direction].hasImpact(this);
     }
 
     @Override
@@ -118,6 +97,6 @@ public class Tank extends Creature{
 
     @Override
     public int causeDamage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 0;
     }
 }
