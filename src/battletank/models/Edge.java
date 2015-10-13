@@ -20,17 +20,21 @@ public class Edge implements Tangible{
     public Edge(int direction, int screenWeight, int screenHeight){
         switch(direction){
             case Direction.UP:
-                position = new Point(0, 0-screenHeight);
+                position = new Point(0, 0-screenWeight);
                 size = screenWeight;
+                break;
             case Direction.DOWN:
                 position = new Point(0, screenHeight);
                 size = screenWeight;
+                break;
             case Direction.LEFT:
-                position = new Point(0-screenWeight, 0);
+                position = new Point(0-screenHeight, 0);
                 size = screenHeight;
+                break;
             case Direction.RIGHT:
                 position = new Point(screenWeight, 0);
                 size = screenHeight;
+                break;
         }
     }
 

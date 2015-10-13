@@ -19,12 +19,12 @@ import javax.swing.JFrame;
  */
 public class Background extends JFrame{
     private BufferedImage screen;
-    private Creature[] objects;
+    private Drawable[] objects;
     
-    public Background(java.net.URL fileName, Creature[] objects){
+    public Background(java.net.URL fileName, Drawable[] objects, int x, int y){
         super("Tank Battle");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(x, y);
         setResizable(false);
         setVisible(true);
         createBufferStrategy(2);
@@ -48,7 +48,7 @@ public class Background extends JFrame{
         
         g2.drawImage(screen, 0, 0, null);
         
-        for(Creature obj : objects){
+        for(Drawable obj : objects){
             obj.draw((Graphics2D) g2);
         }
         g.dispose();

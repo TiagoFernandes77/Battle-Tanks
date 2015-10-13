@@ -38,13 +38,13 @@ public abstract class Creature implements Drawable, Tangible{
     
     @Override
     public void draw(Graphics2D g2d) {
-		Graphics2D g = (Graphics2D) g2d.create();		
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g.drawImage(image, position.x, position.y,
-                        position.x+size, position.y+size,
-                        size*direction, 0, size*(direction+1), size,
-                        null);
-		g.dispose();
+        Graphics2D g = (Graphics2D) g2d.create();		
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.drawImage(image, position.x, position.y,
+                position.x+size, position.y+size,
+                size*direction, 0, size*(direction+1), size,
+                null);
+        g.dispose();
     }
     
     @Override
@@ -66,11 +66,16 @@ public abstract class Creature implements Drawable, Tangible{
     public boolean hasImpact(Tangible target) {
         Point targetPosition = target.getPosition();
         int targetSize = target.getSize();
-        
-        return !(targetPosition.y+targetSize < position.y ||
+        if (!(targetPosition.y+targetSize < position.y ||
                 targetPosition.x > position.x+size ||
                 targetPosition.x+targetSize < position.x ||
-                targetPosition.y > position.y+size);
+                targetPosition.y > position.y+size)){
+            System.out.println("impact " + targetPosition.toString());
+            System.out.println(targetSize);
+            System.out.println("tank " + position.toString());
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -16,6 +16,7 @@ public class Tank extends Creature{
     private boolean isActive;
     private int speed;
     private final Edge[] edges;
+    public Missile missile;
     
     /**
      * @param fileName
@@ -31,6 +32,7 @@ public class Tank extends Creature{
         life = 1;
         isActive = true;
         this.edges = edges;
+        missile = new Missile(1, 15);
     }
 
     public int getLife() {
@@ -58,35 +60,42 @@ public class Tank extends Creature{
     }
     
     public void turnUp(){
+        direction = Direction.UP;
         if (!isEdge(Direction.UP)) {
             position.y -= speed;
-            direction = Direction.UP;
+            
         }
     }
     
     public void turnDown(){
+        direction = Direction.DOWN;
         if (!isEdge(Direction.DOWN)) {
             position.y += speed;
-            direction = Direction.DOWN;
+            
         }
     }
     
     public void turnLeft(){
+        direction = Direction.LEFT;
         if (!isEdge(Direction.LEFT)) {
             position.x -= speed;
-            direction = Direction.LEFT;
+            
         }
     }
     
     public void turnRigth(){
+        direction = Direction.RIGHT;
         if (!isEdge(Direction.RIGHT)) {
             position.x += speed;
-            direction = Direction.RIGHT;
+            
         }
     }
     
     public boolean isEdge(int direction){
-        return edges[direction].hasImpact(this);
+        boolean ret = hasImpact(edges[direction]);
+        //System.out.println(direction);
+        //System.out.println(ret);
+        return ret;
     }
 
     @Override
@@ -98,5 +107,11 @@ public class Tank extends Creature{
     @Override
     public int causeDamage() {
         return 0;
+    }
+    
+    public void fire(){
+        if (!missile.isActive){
+            missile.start(position.x, position.y, direction);
+        }
     }
 }

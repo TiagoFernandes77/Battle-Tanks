@@ -8,7 +8,9 @@ package battletank.core;
 import battletank.models.Background;
 import battletank.models.Tank;
 import battletank.models.Creature;
+import battletank.models.Drawable;
 import battletank.models.Edge;
+import battletank.models.Movable;
 import battletank.utils.Direction;
 import battletank.utils.Keyboard;
 import java.awt.EventQueue;
@@ -24,6 +26,8 @@ public class BattleTank extends Game{
     public final Tank player1;
     public final Edge[] edges;
     public final Keyboard keyboard;
+    public Drawable[] drawableObjects;
+    public Movable[] movableObjects;
 
     public BattleTank() {
         super(30);
@@ -37,16 +41,19 @@ public class BattleTank extends Game{
         edges[Direction.RIGHT] = new Edge(Direction.RIGHT, screenWidth, screenHeigth);
         
         player1 = new Tank(getClass().getResource("/Imagens/tank1.png"),
-                10, 10, 5, edges);
+                10, 10, 10, edges);
         
         keyboard = new Keyboard();
-        Creature[] drawableObjects;
-        drawableObjects = new Creature[1];
+        drawableObjects = new Drawable[2];
         drawableObjects[0] = player1;
+        drawableObjects[1] = player1.missile;
+        
+        movableObjects = new Movable[1];
+        movableObjects[0] = player1.missile;
         
         background = new Background(
                 getClass().getResource("/Imagens/background.jpg"),
-                drawableObjects);
+                drawableObjects, screenWidth, screenHeigth);
         
         background.addKeyListener(keyboard);
     }
@@ -67,6 +74,14 @@ public class BattleTank extends Game{
         
         if (keyboard.isKeyPressed(KeyEvent.VK_RIGHT)) {
             player1.turnRigth();
+        }
+        
+        if (keyboard.isKeyPressed(KeyEvent.VK_SPACE)){
+            player1.fire();
+        }
+        
+        for(Movable m : movableObjects){
+            m.move();
         }
     }
 
