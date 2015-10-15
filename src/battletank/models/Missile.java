@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,6 +29,7 @@ public class Missile implements Tangible, Drawable, Movable{
     public int direction;
     public BufferedImage image;
     public int speed;
+    public ArrayList<Tangible> targets;
     
     public Missile(int damage, int speed){
         
@@ -43,6 +45,7 @@ public class Missile implements Tangible, Drawable, Movable{
         this.speed = speed;
         isActive = false;
         position = new Point(0, 0);
+        targets = new ArrayList<Tangible>();
     }
     
     @Override
@@ -115,5 +118,14 @@ public class Missile implements Tangible, Drawable, Movable{
         position.set(x, y);
         isActive = true;
         this.direction = direction;
+    }
+    
+    public void update(){
+        for (int i = 0; i < targets.size(); i++){
+            if (hasImpact(targets.get(i))){
+                targets.get(i).wasStruck(this);
+                this.wasStruck(targets.get(i));
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@ import battletank.utils.Direction;
 import battletank.utils.Keyboard;
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
 /**
  *
@@ -51,6 +52,8 @@ public class BattleTank extends Game{
         movableObjects = new Movable[1];
         movableObjects[0] = player1.missile;
         
+        player1.missile.targets.addAll(Arrays.asList(edges));
+       
         background = new Background(
                 getClass().getResource("/Imagens/background.jpg"),
                 drawableObjects, screenWidth, screenHeigth);
@@ -83,6 +86,8 @@ public class BattleTank extends Game{
         for(Movable m : movableObjects){
             m.move();
         }
+        
+        player1.missile.update();
     }
 
     @Override
