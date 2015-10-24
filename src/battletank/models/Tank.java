@@ -110,8 +110,27 @@ public class Tank extends Creature{
     }
     
     public void fire(){
+        int x = 0, y = 0;
         if (!missile.isActive){
-            missile.start(position.x, position.y, direction);
+            switch(direction){
+                case Direction.UP:
+                    x = position.x + size/3;
+                    y = position.y - 2;
+                    break;
+                case Direction.DOWN:
+                    x = position.x + size/3;
+                    y = position.y + size + 2;
+                    break;
+                case Direction.LEFT:
+                    x = position.x - 2;
+                    y = position.y + size/3;
+                    break;
+                case Direction.RIGHT:
+                    x = position.x + size + 2;
+                    y = position.y + size/3;
+                    break;
+            }
+            missile.start(x, y, direction);
         }
     }
 }
