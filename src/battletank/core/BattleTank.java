@@ -6,8 +6,8 @@
 package battletank.core;
 
 import battletank.models.Background;
+import battletank.models.Boss;
 import battletank.models.Tank;
-import battletank.models.Creature;
 import battletank.models.Drawable;
 import battletank.models.Edge;
 import battletank.models.Movable;
@@ -25,6 +25,7 @@ public class BattleTank extends Game{
     
     public final Background background;
     public final Tank player1;
+    public final Boss boss;
     public final Edge[] edges;
     public final Keyboard keyboard;
     public Drawable[] drawableObjects;
@@ -44,13 +45,18 @@ public class BattleTank extends Game{
         player1 = new Tank(getClass().getResource("/Imagens/tank1.png"),
                 10, 10, 10, edges);
         
+        boss = new Boss(getClass().getResource("/Imagens/tank1.png"),
+                screenWidth-80, screenHeigth-80, 10, edges, player1.position);
+        
         keyboard = new Keyboard();
-        drawableObjects = new Drawable[2];
+        drawableObjects = new Drawable[3];
         drawableObjects[0] = player1;
         drawableObjects[1] = player1.missile;
+        drawableObjects[2] = boss;
         
-        movableObjects = new Movable[1];
+        movableObjects = new Movable[2];
         movableObjects[0] = player1.missile;
+        movableObjects[1] = boss;
         
         player1.missile.targets.addAll(Arrays.asList(edges));
        
@@ -86,7 +92,6 @@ public class BattleTank extends Game{
         for(Movable m : movableObjects){
             m.move();
         }
-        
         player1.missile.update();
     }
 

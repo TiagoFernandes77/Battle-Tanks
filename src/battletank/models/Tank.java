@@ -14,7 +14,7 @@ import battletank.utils.Direction;
 public class Tank extends Creature{
     private int life;
     private boolean isActive;
-    private int speed;
+    public int speed;
     private final Edge[] edges;
     public Missile missile;
     
@@ -93,8 +93,6 @@ public class Tank extends Creature{
     
     public boolean isEdge(int direction){
         boolean ret = hasImpact(edges[direction]);
-        //System.out.println(direction);
-        //System.out.println(ret);
         return ret;
     }
 
